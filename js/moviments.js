@@ -1,6 +1,5 @@
 function passaSeguent(objRebut){
   let idObjPregAct = objRebut.parentElement.parentElement.id; 
-  //let objPregAct = document.getElementById(idObjPregAct);
   let colArticles = document.getElementsByTagName("article");
   let idObjPregSeg;
     for (let i = 0; i < colArticles.length; i++) {
