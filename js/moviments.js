@@ -1,26 +1,52 @@
-let preguntaEnCurs = 1;
-let preguntaUltima = 4;
+let preguntaEnCurs = 0;
+let preguntaUltima = 3;
+
+let arrBoolRespostes = [];
+
+for (var i = 0; i <= preguntaUltima; i++) {
+  arrBoolRespostes.push(false);
+};
+
+function marcaComResposta(){
+  // debugger;
+  alert("Has modificat el valor!");
+  arrBoolRespostes[preguntaEnCurs]=true;
+
+  let idBotoAHabilitar = "btSeg0" + (preguntaEnCurs + 1);
+  document.getElementById(idBotoAHabilitar).disabled = false;
+
+  // document.getElementById("myBtn").disabled = true;
+  // id="btAnt01" 
+  // id="btSeg01" 
+}
 
 function passaSeguent(objRebut){
+// debugger;
 
   if (preguntaEnCurs == preguntaUltima){
     alert("Ets a la darrera pregunta!" + preguntaEnCurs + " de " + preguntaUltima);
     preguntaEnCurs --;
   } else {
-    alert("Ets a la pregunta " + preguntaEnCurs + " de " + preguntaUltima);
-    let idObjPregAct = objRebut.parentElement.parentElement.id; 
-    let colArticles = document.getElementsByTagName("article");
-    let idObjPregSeg;
-    for (let i = 0; i < colArticles.length; i++) {
-      if(colArticles[i].id == idObjPregAct){
-        idObjPregSeg = colArticles[i+1].id;
-        break;
-      };
-    }
+    //alert("Ets a la pregunta " + preguntaEnCurs + " de " + preguntaUltima);
     
-    amagaElement(idObjPregAct);
-    mostraElement(idObjPregSeg);
-    preguntaEnCurs++;
+    if (arrBoolRespostes[preguntaEnCurs]==false){
+      alert("No hi ha cap valor!");
+    } else {
+      let idObjPregAct = objRebut.parentElement.parentElement.id;
+      
+      let colArticles = document.getElementsByTagName("article");
+      let idObjPregSeg;
+      for (let i = 0; i < colArticles.length; i++) {
+        if(colArticles[i].id == idObjPregAct){
+          idObjPregSeg = colArticles[i+1].id;
+          break;
+        };
+      }
+      
+      amagaElement(idObjPregAct);
+      mostraElement(idObjPregSeg);
+      preguntaEnCurs++;
+    }
   }
 
 
