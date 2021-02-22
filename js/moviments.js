@@ -1,20 +1,35 @@
-function passaSeguent(objRebut){
-  let idObjPregAct = objRebut.parentElement.parentElement.id; 
-  let colArticles = document.getElementsByTagName("article");
-  let idObjPregSeg;
-    for (let i = 0; i < colArticles.length; i++) {
-    if(colArticles[i].id == idObjPregAct){
-      idObjPregSeg = colArticles[i+1].id;
-      break;
-    };
-  }
+let preguntaEnCurs = 0;
+let preguntaUltima = 4;
 
-  amagaElement(idObjPregAct);
-  mostraElement(idObjPregSeg);
+function passaSeguent(objRebut){
+  preguntaEnCurs++;
+  if (preguntaEnCurs == preguntaUltima){
+    alert("Ets a la darrera pregunta!" + preguntaEnCurs + " de " + preguntaUltima);
+    objRebut.disabled = true;
+    preguntaEnCurs --;
+  } else {
+    alert("Ets a la pregunta " + preguntaEnCurs + " de " + preguntaUltima);
+    let idObjPregAct = objRebut.parentElement.parentElement.id; 
+    let colArticles = document.getElementsByTagName("article");
+    let idObjPregSeg;
+    for (let i = 0; i < colArticles.length; i++) {
+      if(colArticles[i].id == idObjPregAct){
+        idObjPregSeg = colArticles[i+1].id;
+        break;
+      };
+    }
+    
+    amagaElement(idObjPregAct);
+    mostraElement(idObjPregSeg);
+
+  }
+// debugger;
+
 }
 
 
 function passaAnterior(objRebut){
+  alert("Ets a la pregunta " + preguntaEnCurs + " de " + preguntaUltima);
   let idObjPregAct = objRebut.parentElement.parentElement.id; 
   let colArticles = document.getElementsByTagName("article");
   let idObjPregAnt;
@@ -27,6 +42,8 @@ function passaAnterior(objRebut){
   
   amagaElement(idObjPregAct);
   mostraElement(idObjPregAnt);
+  preguntaEnCurs--;
+
 }
 
 function mostraElement(idRebut){
