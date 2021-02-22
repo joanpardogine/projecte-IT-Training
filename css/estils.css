@@ -343,6 +343,11 @@ input[type=text]::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: lightgrey;
 }
 
+.centrat{
+  display: flex;
+  justify-content: space-between;
+}
+
 button {
   overflow: visible;
   width: 20%;  
