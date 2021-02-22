@@ -1,11 +1,10 @@
-let preguntaEnCurs = 0;
+let preguntaEnCurs = 1;
 let preguntaUltima = 4;
 
 function passaSeguent(objRebut){
-  preguntaEnCurs++;
+
   if (preguntaEnCurs == preguntaUltima){
     alert("Ets a la darrera pregunta!" + preguntaEnCurs + " de " + preguntaUltima);
-    objRebut.disabled = true;
     preguntaEnCurs --;
   } else {
     alert("Ets a la pregunta " + preguntaEnCurs + " de " + preguntaUltima);
@@ -21,9 +20,9 @@ function passaSeguent(objRebut){
     
     amagaElement(idObjPregAct);
     mostraElement(idObjPregSeg);
-
+    preguntaEnCurs++;
   }
-// debugger;
+
 
 }
 
