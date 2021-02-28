@@ -24,11 +24,11 @@ const quizContainer = document.getElementById('quiz');
 
  // div_questionari
 
- const preguntes = [
+ const llistaPreguntes = [
   {
     tipusPreg: "tx",
-    enunciat: "Lorem ipsum dolor  *** Correcta = Lorem *** amet, consectetur adipiscing elit. Fusce hendrerit diam vitae urna pulvinar commodo. Suspendisse tristique eu justo in dignissim. Phasellus ut nibh ornare, porttitor sapien a, eleifend massa?",
-    respostes: {
+    enunciatPreg: "Lorem ipsum dolor  *** Correcta = Lorem *** amet, consectetur adipiscing elit. Fusce hendrerit diam vitae urna pulvinar commodo. Suspendisse tristique eu justo in dignissim. Phasellus ut nibh ornare, porttitor sapien a, eleifend massa?",
+    respostesPossibles: {
       a: "",
       b: "",
       c: ""
@@ -37,8 +37,8 @@ const quizContainer = document.getElementById('quiz');
   },
   {
     tipusPreg: "ch",
-    enunciat: "WUltricies *** Correcta = C *** nisi quam metus dictum justo magna litora, condimentum pulvinar libero porttitor sem eleifend odio, bibendum aliquet cursus facilisis lacus hendrerit. Malesuada vestibulum sapien aenean accumsan porttitor nisi hac. ",
-    respostes: {
+    enunciatPreg: "WUltricies *** Correcta = C *** nisi quam metus dictum justo magna litora, condimentum pulvinar libero porttitor sem eleifend odio, bibendum aliquet cursus facilisis lacus hendrerit. Malesuada vestibulum sapien aenean accumsan porttitor nisi hac. ",
+    llistaPreguntes: {
       a: "Seda ut perspiciatis unde omnis",
       b: "Nemo enim ipsam voluptatem quia",
       c: "At vero eos et accusamus et iusto odio",
@@ -48,8 +48,8 @@ const quizContainer = document.getElementById('quiz');
   },
   {
     tipusPreg: "ra",
-    enunciat: "Nullam tempor magnis *** Correcta = d *** interdum aliquam massa cras metus, eu urna suspendisse eros montes phasellus class quis natoque magnis libero porta id etiam placerat dui, lectus natoque turpis accumsan quis nisl aliquet.",
-    respostes: {
+    enunciatPreg: "Nullam tempor magnis *** Correcta = d *** interdum aliquam massa cras metus, eu urna suspendisse eros montes phasellus class quis natoque magnis libero porta id etiam placerat dui, lectus natoque turpis accumsan quis nisl aliquet.",
+    llistaPreguntes: {
       a: "Massa penatibus potenti pellentesque.",
       b: "Lectus laoreet senectus vitae risus lacinia.",
       c: "Litora rhoncus placerat urna sodales dignissim in mattis, lectus fusce elementum.",
@@ -59,8 +59,8 @@ const quizContainer = document.getElementById('quiz');
   },
   {  // &lt;Escull una de les següents opcions.&gt;
     tipusPreg: "so",
-    enunciat: "Taciti vulputate iaculis  *** Correcta = a ***  ut facilisis ridiculus, curabitur morbi fermentum cubilia cursus, id blandit massa etiam hendrerit.",
-    respostes: {
+    enunciatPreg: "Taciti vulputate iaculis  *** Correcta = a ***  ut facilisis ridiculus, curabitur morbi fermentum cubilia cursus, id blandit massa etiam hendrerit.",
+    llistaPreguntes: {
       a: "Mollis et ultrices lectus morbi nisi quisque imperdiet bibendum id nisl posuere.",
       b: "Condimentum himenaeos leo cubilia etiam turpis velit dui fames ultricies.",
       c: "Ac neque augue luctus habitasse ad porta cum nulla potenti quisque himenaeos."
@@ -82,10 +82,10 @@ pintaQuestionari();
 
 
 function ompleRespCorrectes(){
-  respCorrectes [preguntes.length];
-  for (let i=0; i<preguntes.length; i++){
-    console.log("i = " + i + "preguntes[i].respCorrecta = " + preguntes[i].respCorrecta);
-    respCorrectes[i]=preguntes[i].respCorrecta;
+  respCorrectes [llistaPreguntes.length];
+  for (let i=0; i<llistaPreguntes.length; i++){
+    console.log("i = " + i + "llistaPreguntes[i].respCorrecta = " + llistaPreguntes[i].respCorrecta);
+    respCorrectes[i]=llistaPreguntes[i].respCorrecta;
   }
 }
 
@@ -93,13 +93,12 @@ function ompleRespCorrectes(){
 function pintaQuestionari(){   // buildQuiz
   let elementArticle, elementTitol, elementEnunciat, elementRespostes;  
   let pregActualTxt = "";
-  let pregActualEnt = 1;
   let esVisible;
   let txtTipusPreg;
 
 
 
-  preguntaUltima = preguntes.length;
+  preguntaUltima = llistaPreguntes.length;
   console.log ("preguntaUltima = " + preguntaUltima);
 
   // Variable per emmagatzemar la sortida HTML
@@ -110,40 +109,40 @@ function pintaQuestionari(){   // buildQuiz
 
 
 
-  // per cada pregutna ...
-  // preguntes.forEach(   // myQuestions = preguntes
+  // per cada pregunta ...
+  // llistaPreguntes.forEach(   // myQuestions = llistaPreguntes
     //(preguntaEnCurs, preguntaNumero) => {
       //  preguntaEnCurs = currentQuestion
       //  preguntaNumero = questionNumber
       // variable to store the list of possible answers
       
-      for (let i=0; i<preguntes.length; i++){ 
+      for (let pregActualEnt=0; pregActualEnt<llistaPreguntes.length; pregActualEnt++){ 
         const respostes = [];  // answers = respostes
         // Per omplir l'elementArticle
         //  <article id="pregunta-01-tx" class="elementVisible">
 
         // create element
         let nouArticle = document.createElement("article");   // Es crea l'element <article> per omplir-lo
-        
-        if (pregActualEnt<10) {
-          pregActualTxt = "0" + pregActualEnt;
+         debugger;
+        if ((pregActualEnt+1)<10) {
+          pregActualTxt = "0" + (pregActualEnt + 1);
         } else {
-          pregActualTxt = pregActualEnt;
+          pregActualTxt = pregActualEnt + 1;
         }
         // pregActualTxt = (pregActualEnt<10) ? "0" + pregActualEnt : pregActualEnt ;
         
-        if (i==0) {
+        if (pregActualEnt==0) {
           esVisible = "elementVisible";
         } else {
           esVisible = "elementOcult";
         }
-        //esVisible =  (i==1) ? 'elementVisible' : 'elementOcult'; 
+        //esVisible =  (pregActualEnt==1) ? 'elementVisible' : 'elementOcult'; 
 
-      nouArticle.id = 'pregunta-' + pregActualTxt + '-' + preguntes[i].tipusPreg; // S'afegeix l'identificador
+      nouArticle.id = 'pregunta-' + pregActualTxt + '-' + llistaPreguntes[pregActualEnt].tipusPreg; // S'afegeix l'identificador
 
       nouArticle.classList.add(esVisible); // S'afegeix la classe pertinent per si es visible o no.
 
-      // elementArticle = '<article id="pregunta-' + pregActualTxt + '-' + preguntes[i].tipusPreg + '" class="' + esVisible + '">';
+      // elementArticle = '<article id="pregunta-' + pregActualTxt + '-' + llistaPreguntes[pregActualTxt].tipusPreg + '" class="' + esVisible + '">';
 
 
       
@@ -152,17 +151,17 @@ function pintaQuestionari(){   // buildQuiz
       // Per omplir l'element span titol
       // <span class="titol">Pregunta #1 (text)</span>
       
-      switch (preguntes[i].tipusPreg){
+      switch (llistaPreguntes[pregActualEnt].tipusPreg){
         case "tx": txtTipusPreg = "text"; break;
         case "ch": txtTipusPreg = "checkbox"; break;
         case "ra": txtTipusPreg = "radio"; break;
         case "so": txtTipusPreg = "Select One"; break;
       }
       
-      // elementTitol = '<span class="titol">Pregunta #' + i + ' (' + txtTipusPreg + ')</span>';
+      // elementTitol = '<span class="titol">Pregunta #' + pregActualTxt + ' (' + txtTipusPreg + ')</span>';
       
-      let titolPregunta = document.createTextNode('Pregunta #' + i + ' (' + txtTipusPreg + ')');
-      // elementTitol.innerHTML = 'Pregunta #' + i + '(' + txtTipusPreg + ')';
+      let titolPregunta = document.createTextNode('Pregunta #' + pregActualTxt + ' (' + txtTipusPreg + ')');
+      // elementTitol.innerHTML = 'Pregunta #' + pregActualTxt + '(' + txtTipusPreg + ')';
       
       nouTitol.appendChild(titolPregunta);
       nouTitol.classList.add("titol");  // Afegim la classe titol al nouTitol
@@ -174,13 +173,14 @@ function pintaQuestionari(){   // buildQuiz
       /*  <div class="enunciat">
       <p>bla, bla, bla.</p>
       </div> */
-      elementEnunciat = '<div class="enunciat"><p>' + preguntes[i].enunciat + "</p></div>";
+
+      elementEnunciat = '<div class="enunciat"><p>' + llistaPreguntes[pregActualEnt].enunciatPreg + "</p></div>";
 
       let nouEnunciatPregunta = document.createElement("DIV");    // Es crea l'element <div> per l'enunciat
       nouEnunciatPregunta.classList.add("enunciat");      // Afegim la classe enunciat al nouEnunciatPregunta
 
       let nouTextEnunciat = document.createElement("P");    // Es crea l'element <p> per l'enunciat
-      nouTextEnunciat.innerHTML = preguntes[i].enunciat;  // Afegim el text de l'enunciat al nouTextEnunciat
+      nouTextEnunciat.innerHTML = llistaPreguntes[pregActualEnt].enunciatPreg;  // Afegim el text de l'enunciat al nouTextEnunciat
 
       nouEnunciatPregunta.appendChild(nouTextEnunciat);  // Afegim el text de l'enunciat al nouEnunciatPregunta
       
@@ -242,7 +242,7 @@ function pintaQuestionari(){   // buildQuiz
     };
         //onclick="passaAnterior(this)"
         
-        if (i==0) {
+        if (pregActualEnt==0) {
           nouBotoAnterior.disabled = true;
         } else {
           nouBotoAnterior.disabled = false;
@@ -276,7 +276,7 @@ function pintaQuestionari(){   // buildQuiz
     //  + '<button id="btSeg'+ pregActualTxt + ' disabled onclick="'
     //  + 'passaSeguent(this)">Següent >></button>'
     //  + '</div>'
-    //  + '</article> <!-- FINAL <article id="pregunta-'+ pregActualTxt + '-' + preguntes[i].tipusPreg + '"> -->';
+    //  + '</article> <!-- FINAL <article id="pregunta-'+ pregActualTxt + '-' + llistaPreguntes[pregActualEnt].tipusPreg + '"> -->';
      
      // FINAL Per omplir l'element div respostes 
 
@@ -289,7 +289,7 @@ function pintaQuestionari(){   // buildQuiz
       //  <div class="question">  <article id="pregunta-02-ch" class="elementOcult">
 
 
-    }  // FINAL == for (let i=0; i<preguntes.length; i++)
+    }  // FINAL == for (let pregActualEnt=0; pregActualEnt<llistaPreguntes.length; pregActualEnt++){ 
   
 
   // finally combine our questionariHTML list into one string of HTML and put it on the page
