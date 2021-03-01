@@ -2,7 +2,7 @@ let preguntaEnCurs = 0;
 let preguntaUltima;
 
 let arrBoolRespostes = [];
-const contenidorQuestionari = document.getElementById('contenidorQuestionari');
+let respCorrectes = [];
 
 /* tipusPreg: tx => input type="text"
  * tipusPreg: ch => input type="checkbox" 
@@ -56,4 +56,91 @@ const llistaPreguntes = [
   }
 ];
 
+ompleRespCorrectes();
+pintaQuestionari();
 
+
+function ompleRespCorrectes(){
+  /* Recorrem l'Array llistaPreguntes i guardem les respostes correctes
+  *  a l'Array respCorrectes. */
+  respCorrectes[llistaPreguntes.length];
+  for(let i=0; i<llistaPreguntes.length; i++){
+    respCorrectes[i]=llistaPreguntes[i].respCorrecta;
+  }
+}
+
+function pintaQuestionari(){
+  let preguntaActualTxt;
+  // Variable per associar la sortida a l'element HTML
+  let contenidorQuestionari = document.getElementById("contenidorQuestionari");
+  let elementArticle, elementTitol;
+  let esVisible;
+  let tipusPregText;
+
+  for(let preguntaActual=0; preguntaActual<llistaPreguntes.length; preguntaActual++){
+    // Per omplir l'element article <article id="pregunta-??-??" class="elementVisible">
+    elementArticle = "";
+    elementTitol = "";
+    tipusPregText ="";
+
+    // if ((preguntaActual+1)<10){
+    //   preguntaActualTxt = "0" + (preguntaActual + 1);
+    // } else {
+    //   preguntaActualTxt = preguntaActual + 1;
+    // }
+
+    preguntaActualTxt = ((preguntaActual+1)<10) ? "0" + (preguntaActual + 1) : preguntaActual + 1;
+    
+    // if (preguntaActual==0){
+    //   esVisible = 'elementVisible';
+    // } else {
+    //   esVisible = 'elementOcult';
+    // }
+    esVisible = (preguntaActual==0) ? 'elementVisible' : 'elementOcult';
+    
+    elementArticle = '<article id="pregunta-'
+        + preguntaActualTxt
+        + '-'
+        + llistaPreguntes[preguntaActual].tipusPreg
+        + '" class="'
+        + esVisible
+        +'">';
+    // FINAL Per omplir l'element article <article id="pregunta-??-??" class="elementVisible">
+
+    //  Per omplir l'element span class="titol"
+    // <span class="titol">Pregunta #1 (text)</span>
+
+    switch (llistaPreguntes[preguntaActual].tipusPreg){
+      case "tx":
+          tipusPregText = "text";
+          break;
+      case "ch":
+          tipusPregText = "Check Box";
+          break;
+      case "ra":
+          tipusPregText = "Radio Button";
+          break;
+      case "so":
+          tipusPregText = "Select One";
+          break;
+    }
+
+    elementTitol = '<span class="titol">Pregunta #'
+            + (preguntaActual + 1)
+            + ' ('
+            + tipusPregText
+            + ')</span>';
+
+    //  FINAL Per omplir l'element span class="titol"
+    console.log ("elementArticle = " + elementArticle);
+    console.log ("elementTitol = " + elementTitol);
+
+    contenidorQuestionari.innerHTML += elementArticle 
+        + elementTitol 
+        + '</article>';
+    // contenidorQuestionari.innerHTML = contenidorQuestionari.innerHTML + elementArticle + '</article>';
+
+  } // for(let preguntaActual=0; preguntaActual<llistaPreguntes.length; preguntaActual++){
+
+
+}
