@@ -1,7 +1,4 @@
-let preguntaEnCurs = 0;
-let preguntaUltima = 3;
 
-let arrBoolRespostes = [];
 
 for (var i = 0; i <= preguntaUltima; i++) {
   arrBoolRespostes.push(false);
