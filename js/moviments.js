@@ -1,15 +1,10 @@
-let preguntaEnCurs = 0;
-let preguntaUltima = 3;
+preguntaEnCurs = 0;
 
-let arrBoolRespostes = [];
-
-for (var i = 0; i <= preguntaUltima; i++) {
+for (var i = 0; i <= llistaPreguntes.length; i++) {
   arrBoolRespostes.push(false);
 };
 
 function marcaComResposta(){
-  // debugger;
-  alert("Has modificat el valor!");
   arrBoolRespostes[preguntaEnCurs]=true;
 
   let idBotoAHabilitar = "btSeg0" + (preguntaEnCurs + 1);
@@ -21,8 +16,6 @@ function marcaComResposta(){
 }
 
 function passaSeguent(objRebut){
-// debugger;
-
   if (preguntaEnCurs == preguntaUltima){
     alert("Ets a la darrera pregunta!" + preguntaEnCurs + " de " + preguntaUltima);
     preguntaEnCurs --;
