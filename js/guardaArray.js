@@ -2,10 +2,12 @@ let preguntaEnCurs = 0;
 let preguntaUltima;
 
 let arrBoolRespostes = [];
-
-//contenidorQuestionari
-
 const contenidorQuestionari = document.getElementById('contenidorQuestionari');
+
+/* tipusPreg: tx => input type="text"
+ * tipusPreg: ch => input type="checkbox" 
+ * tipusPreg: ra => input type="radio" 
+ * tipusPreg: so => select id="  --> <option> */
 
 const llistaPreguntes = [
   {
@@ -14,7 +16,8 @@ const llistaPreguntes = [
      respostesPossibles: { 
         a: "",
         b: "",
-        c: ""
+        c: "",
+        d: ""
      },
      respCorrecta: "Lorem"
   },
@@ -46,8 +49,11 @@ const llistaPreguntes = [
      respostesPossibles: {
         a: "Mollis et ultrices lectus morbi nisi quisque imperdiet bibendum id nisl posuere.",
         b: "Condimentum himenaeos leo cubilia etiam turpis velit dui fames ultricies.",
-        c: "Ac neque augue luctus habitasse ad porta cum nulla potenti quisque himenaeos."
+        c: "Ac neque augue luctus habitasse ad porta cum nulla potenti quisque himenaeos.",
+        d: ""
      },
      respCorrecta: "a"
   }
 ];
+
+
