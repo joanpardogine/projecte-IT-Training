@@ -1,4 +1,4 @@
-# projecte-IT-Training
+## Diferències entre els diferents tipus de preguntes.
 
 # Pregunta (text)
 
