@@ -63,7 +63,7 @@
       </article> <!-- FINAL <article id="pregunta-02-ch"> -->
 ```
 
-# Pregunta (checkbox)
+# Pregunta (radioButton)
 
 ```html
             <article id="pregunta-03-ra" class="elementOcult">
