@@ -72,7 +72,8 @@ function pintaQuestionari(){
   let preguntaActualTxt;
   // Variable per associar la sortida a l'element HTML
   let contenidorQuestionari = document.getElementById(`contenidorQuestionari`);
-  let elementArticle, elementTitol, elementEnunciat, elementRespostes, elementGrupBotons;
+  let elementArticle, elementTitol, elementEnunciat, elementRespostesInici, elementRespostesFinal, elementGrupBotons;
+  let elementLabel;
   let esVisible;
   let tipusPregText;
 
@@ -82,93 +83,97 @@ function pintaQuestionari(){
     elementTitol = ``;
     tipusPregText = ``;
     elementEnunciat = ``;
-    elementRespostes = ``;
+    elementRespostesInici = ``;
+    elementRespostesFinal = ``;
+
+
+    elementLabel=``;
     elementGrupBotons = ``;
 
-    // Per omplir l'element article <article id="pregunta-??-??" class="elementVisible">
-    // if ((preguntaActual+1)<10){
-    //   preguntaActualTxt = "0" + (preguntaActual + 1);
-    // } else {
-    //   preguntaActualTxt = preguntaActual + 1;
-    // }
-
     preguntaActualTxt = ((preguntaActual+1)<10) ? `0${(preguntaActual + 1)}`: `${preguntaActual + 1}`;
-    
-    // if (preguntaActual==0){
-    //   esVisible = 'elementVisible';
-    // } else {
-    //   esVisible = 'elementOcult';
-    // }
     esVisible = (preguntaActual==0) ? `elementVisible` : `elementOcult`;
     
     elementArticle = `<article id="pregunta-${preguntaActualTxt}-${llistaPreguntes[preguntaActual].tipusPreg}" class="${esVisible}">`;
 
-/**    elementArticle = '<article id="pregunta-'
-        + preguntaActualTxt
-        + '-'
-        + llistaPreguntes[preguntaActual].tipusPreg
-        + '" class="'
-        + esVisible
-        +'">'; */
-
-
-    // FINAL Per omplir l'element article <article id="pregunta-??-??" class="elementVisible">
-
-    //  Per omplir l'element span class="titol"
-    // <span class="titol">Pregunta #1 (text)</span>
-
     switch (llistaPreguntes[preguntaActual].tipusPreg){
-      case `tx`: tipusPregText = `text`; break;
-      case `ch`: tipusPregText = `Check Box`; break;
-      case `ra`: tipusPregText = `Radio Button`; break;
-      case `so`: tipusPregText = `Select One`; break;
+      case `tx`:
+         tipusPregText = `text`;
+         elementLabel =`<label class="opcio col1"><input type="text" id="resp-${preguntaActualTxt}" name="resposta-${preguntaActual}" placeholder="Ut enim ad minima veniam" onchange="marcaComResposta()"/></label>`;
+         break;
+
+      case `ch`:
+         let textInputCheckBox = `<input type="checkbox" name="preg_${preguntaActualTxt}"onclick="marcaComResposta()"/>`;
+         tipusPregText = `Check Box`;
+         elementLabel =`<label class="opcio col2">
+         ${textInputCheckBox}
+         <span>${llistaPreguntes[preguntaActual].respostesPossibles.a}</span></label>
+         <label class="opcio col2">
+         ${textInputCheckBox}
+         <span>${llistaPreguntes[preguntaActual].respostesPossibles.b}</span></label>
+         <label class="opcio col2">
+         ${textInputCheckBox}
+         <span>${llistaPreguntes[preguntaActual].respostesPossibles.c}</span></label>
+         <label class="opcio col2">
+         ${textInputCheckBox}
+         <span>${llistaPreguntes[preguntaActual].respostesPossibles.d}</span></label>`;
+      break;
+
+      case `ra`:
+         let textInputRadio = `<input type="radio" name="preg_${preguntaActualTxt}"onclick="marcaComResposta()"/>`;
+         tipusPregText = `Radio Button`;
+         elementLabel =`<label class="opcio col2">
+         ${textInputRadio}
+         <span>${llistaPreguntes[preguntaActual].respostesPossibles.a}</span></label>
+         <label class="opcio col2">
+         ${textInputRadio}
+         <span>${llistaPreguntes[preguntaActual].respostesPossibles.b}</span></label>
+         <label class="opcio col2">
+         ${textInputRadio}
+         <span>${llistaPreguntes[preguntaActual].respostesPossibles.c}</span></label>
+         <label class="opcio col2">
+         ${textInputRadio}
+         <span>${llistaPreguntes[preguntaActual].respostesPossibles.d}</span></label>`;
+
+
+         break;
+
+      case `so`:
+         tipusPregText = `Select One`;
+         elementLabel =`<label class="opcio col1">
+            <select id="resp-${preguntaActualTxt}" onchange="marcaComResposta()">
+              <option selected>&lt;Escull una de les següents opcions.></option>
+              <option>${llistaPreguntes[preguntaActual].respostesPossibles.a}</option>
+              <option>${llistaPreguntes[preguntaActual].respostesPossibles.b}</option>
+              <option>${llistaPreguntes[preguntaActual].respostesPossibles.c}</option>
+            </select>
+          </label>`;
+         break;
     }
 
-    elementTitol = `<span class="titol">Pregunta #${preguntaActual+1}(${tipusPregText})</span>`;
+   //  elementTitol = `<span class="titol">Pregunta #${preguntaActual+1}(${tipusPregText})</span>`;
+    elementTitol = `<span class="titol">Pregunta #${preguntaActual+1}</span>`;
 
-    //  FINAL Per omplir l'element span class="titol"
-
-    //  Per omplir l'element div class="enunciat"
-    /*  <div class="enunciat">
-          <p>Lorem ipsum dolor sit amet, ... massa?</p>
-        </div> */
     elementEnunciat = `<div class="enunciat"><p>${llistaPreguntes[preguntaActual].enunciatPreg}</p></div>`;
-    //  FINAL Per omplir l'element div class="enunciat"
+     elementRespostesInici= `<div class="respostes">`;
 
-    /*   Per omplir l'element div class="respostes"
-        <div class="respostes">
-          <label class="opcio col1">
-            <input  type="text" id="resp-01"
-                    name="resposta-1"
-                    placeholder="Ut enim ad minima veniam"
-                    onchange="marcaComResposta()"/>
-          </label>
-        </div> <!-- FINAL <div class="respostes">--> */
 
-    elementRespostes= `<div class="respostes"><label class="opcio col1"><input type="text" id="resp-${preguntaActualTxt}" name="resposta-${preguntaActual}" placeholder="Ut enim ad minima veniam" onchange="marcaComResposta()"/></label></div> <!-- FINAL <div class="respostes">-->`;
-
-    //  FINAL Per omplir l'element div class="respostes"
-
-    /*  Per omplir l'element div grup de botons
-       <div class="col2 centrat">
-          <button id="btAnt01" disabled onclick="passaAnterior(this)">&lt;&lt; Anterior</button>
-          <button id="btSeg01" disabled onclick="passaSeguent(this)">Següent >></button>
-       </div> */
+     
+     elementRespostesFinal = `</div> <!-- FINAL <div class="respostes">-->`;
 
        elementGrupBotons = `<div class="col2 centrat"><button id="btAnt${preguntaActualTxt}" disabled onclick="passaAnterior(this)">&lt;&lt; Anterior</button><button id="btSeg${preguntaActualTxt}" disabled onclick="passaSeguent(this)">Següent >></button></div>`;
 
-    //  FINAL Per omplir l'element div grup de botons
+   //  console.log (`elementArticle = ${elementArticle}`);
+   //  console.log (`elementTitol = ${elementTitol}`);
+   //  console.log (`elementEnunciat = ${elementEnunciat}`);
+   //  console.log (`elementRespostesInici = ${elementRespostesInici}`);
 
-    console.log (`elementArticle = ${elementArticle}`);
-    console.log (`elementTitol = ${elementTitol}`);
-    console.log (`elementEnunciat = ${elementEnunciat}`);
-    console.log (`elementRespostes = ${elementRespostes}`);
-    console.log (`elementGrupBotons = ${elementGrupBotons}`);
+   //  console.log (`elementLabel = ${elementLabel}`);
+    
+   //  console.log (`elementRespostesFinal = ${elementRespostesFinal}`);
+   //  console.log (`elementGrupBotons = ${elementGrupBotons}`);
 
-    contenidorQuestionari.innerHTML += `${elementArticle}${elementTitol}${elementEnunciat}${elementRespostes}${elementGrupBotons}</article>`;
-    // contenidorQuestionari.innerHTML = contenidorQuestionari.innerHTML + elementArticle + '</article>';
+    contenidorQuestionari.innerHTML += `${elementArticle}${elementTitol}${elementEnunciat}${elementRespostesInici}${elementLabel}${elementRespostesFinal}${elementGrupBotons}</article>`;
 
-  } // for(let preguntaActual=0; preguntaActual<llistaPreguntes.length; preguntaActual++){
-
+  } 
 
 }
